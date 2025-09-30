@@ -1,12 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Arden Risk - Elite Security Solutions</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --accent-gold: #D4AF37;
+            --accent-orange: #FF6B35;
+            --dark-primary: #0A0A0A;
+            --dark-secondary: #151515;
+            --text-primary: #FFFFFF;
+            --text-secondary: #d6d6d6;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -14,323 +23,361 @@
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #0a0a0a;
-            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+            background: var(--dark-primary);
+            color: var(--text-primary);
             line-height: 1.6;
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* Unique Grid Background */
-        .grid-overlay {
+        /* Organic Background Elements */
+        .organic-bg {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: 
-                linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-            background-size: 50px 50px;
             pointer-events: none;
-            z-index: 1;
+            z-index: 0;
+            overflow: hidden;
         }
 
-        /* Sidebar Navigation - Unique Approach */
-        .sidebar {
+        .organic-shape {
+            position: absolute;
+            border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+            opacity: 0.03;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .shape-1 {
+            width: 600px;
+            height: 600px;
+            background: var(--accent-gold);
+            top: -200px;
+            right: -200px;
+            animation-delay: 0s;
+        }
+
+        .shape-2 {
+            width: 400px;
+            height: 400px;
+            background: var(--accent-orange);
+            bottom: -100px;
+            left: -100px;
+            animation-delay: 5s;
+        }
+
+        .shape-3 {
+            width: 300px;
+            height: 300px;
+            background: var(--accent-gold);
+            top: 50%;
+            left: 10%;
+            animation-delay: 10s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+            33% {
+                transform: translate(30px, -30px) rotate(120deg);
+            }
+            66% {
+                transform: translate(-20px, 20px) rotate(240deg);
+            }
+        }
+
+        /* Header */
+        .header {
             position: fixed;
-            left: 0;
             top: 0;
-            height: 100vh;
-            width: 80px;
-            background: rgba(0, 0, 0, 0.9);
+            left: 0;
+            right: 0;
+            padding: 1.5rem 6%;
+            background: rgba(10, 10, 10, 0.8);
             backdrop-filter: blur(20px);
-            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
             z-index: 1000;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 2rem 0;
             transition: all 0.3s ease;
         }
 
-        .sidebar:hover {
-            width: 200px;
+        .header.scrolled {
+            padding: 1rem 6%;
+            background: rgba(10, 10, 10, 0.95);
         }
 
-        .sidebar-logo {
-            width: 40px;
-            height: 40px;
-            background: #ffffff;
-            color: #000;
-            border-radius: 8px;
+        .header-content {
+            max-width: 1600px;
+            margin: 0 auto;
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            margin-bottom: 3rem;
-            font-size: 1.2rem;
         }
 
-        .sidebar-nav {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-            width: 100%;
+        .logo img {
+            height: 45px;
+            width: auto;
+            transition: transform 0.3s ease;
         }
 
-        .sidebar-nav a {
+        .logo:hover img {
+            transform: scale(1.05);
+        }
+
+        .nav-menu {
             display: flex;
+            gap: 3rem;
+            list-style: none;
             align-items: center;
-            gap: 1rem;
-            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .nav-menu a {
+            color: var(--text-secondary);
             text-decoration: none;
-            padding: 0 1.5rem;
             font-size: 0.9rem;
-            transition: all 0.3s ease;
+            font-weight: 500;
+            transition: color 0.3s ease;
             position: relative;
         }
 
-        .sidebar-nav a:hover {
-            color: #ffffff;
-        }
-
-        .sidebar-nav a::before {
+        .nav-menu a::after {
             content: '';
             position: absolute;
+            bottom: -5px;
             left: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 3px;
-            height: 0;
-            background: #ffffff;
-            transition: height 0.3s ease;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-gold), var(--accent-orange));
+            transition: width 0.3s ease;
         }
 
-        .sidebar-nav a:hover::before {
-            height: 20px;
+        .nav-menu a:hover {
+            color: var(--text-primary);
         }
 
-        .sidebar-nav i {
-            width: 20px;
-            text-align: center;
+        .nav-menu a:hover::after {
+            width: 100%;
         }
 
-        .sidebar-nav span {
-            opacity: 0;
-            transform: translateX(-10px);
-            transition: all 0.3s ease;
-            white-space: nowrap;
-        }
-
-        .sidebar:hover .sidebar-nav span {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        /* Top Bar */
-        .top-bar {
-            position: fixed;
-            top: 0;
-            left: 80px;
-            right: 0;
-            height: 60px;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            z-index: 999;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 2rem;
-        }
-
-        .top-bar-left {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .breadcrumb {
-            color: rgba(255, 255, 255, 0.5);
-            font-size: 0.9rem;
-        }
-
-        .contact-button {
-            background: #ffffff;
-            color: #000;
-            padding: 0.5rem 1.5rem;
+        .cta-header {
+            background: linear-gradient(135deg, var(--accent-gold), var(--accent-orange));
+            color: var(--dark-primary);
+            padding: 0.7rem 1.8rem;
             border: none;
-            border-radius: 20px;
-            font-weight: 600;
+            font-weight: 700;
             font-size: 0.85rem;
             cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
             transition: all 0.3s ease;
-        }
-
-        .contact-button:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
-        }
-
-        /* Main Content Area */
-        .main-content {
-            margin-left: 80px;
-            padding-top: 60px;
-            position: relative;
-            z-index: 2;
-        }
-
-        /* Hero Section - Diagonal Design with Video Background */
-        .hero {
-            height: 100vh;
-            background: linear-gradient(135deg, #1a1a1a 0%, #000000 100%);
-            display: flex;
-            align-items: center;
+            border-radius: 50px;
             position: relative;
             overflow: hidden;
         }
 
-        .hero-video {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: 0;
-            opacity: 0.4;
-        }
-
-        .hero-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 92%;
-            background: linear-gradient(135deg, rgba(26, 26, 26, 0.8) 0%, rgba(0, 0, 0, 0.185) 100%);
-            z-index: 1;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: -20%;
-            width: 40%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.02);
-            transform: skewX(-15deg);
-            z-index: 2;
-        }
-
-        .hero-content {
-            max-width: 800px;
-            padding: 0 3rem;
-            position: relative;
-            z-index: 3;
-        }
-
-        .hero-badge {
-            display: inline-block;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 0.3rem 1rem;
-            border-radius: 15px;
-            font-size: 0.8rem;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 2rem;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .hero h1 {
-            font-size: clamp(3rem, 8vw, 6rem);
-            font-weight: 900;
-            line-height: 0.9;
-            margin-bottom: 2rem;
-            background: linear-gradient(135deg, #ffffff 0%, rgba(255, 255, 255, 0.7) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .hero-subtitle {
-            font-size: 1.3rem;
-            color: rgba(255, 255, 255, 0.8);
-            max-width: 600px;
-            margin-bottom: 3rem;
-            line-height: 1.6;
-        }
-
-        .hero-actions {
-            display: flex;
-            gap: 1rem;
-            align-items: center;
-        }
-
-        .cta-primary {
-            background: #ffffff;
-            color: #000;
-            padding: 1rem 2rem;
-            border: none;
-            border-radius: 0;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .cta-primary::before {
+        .cta-header::before {
             content: '';
             position: absolute;
             top: 0;
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            background: rgba(255, 255, 255, 0.3);
             transition: left 0.5s ease;
         }
 
-        .cta-primary:hover::before {
+        .cta-header:hover::before {
             left: 100%;
         }
 
-        .cta-secondary {
-            background: transparent;
-            color: #ffffff;
-            padding: 1rem 2rem;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
             cursor: pointer;
-            transition: all 0.3s ease;
+        }
+
+        /* Hero Section - Organic Design */
+        .hero {
             position: relative;
-        }
-
-        .cta-secondary:hover {
-            border-color: #ffffff;
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        /* Stats Bar */
-        .stats-bar {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 80px;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(20px);
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            min-height: 100vh;
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 4rem;
+            padding: 8rem 6% 4rem;
+            overflow: hidden;
+            background: linear-gradient(to bottom, rgba(10, 10, 10, 0.8) 0%, rgba(10, 10, 10, 0.4) 100%), 
+                        url('assets/hero-background.webp') center/cover no-repeat;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 150px;
+            background: var(--dark-primary);
+            clip-path: ellipse(100% 100% at 50% 100%);
+            z-index: 1;
+        }
+
+        .hero-content {
+            max-width: 1600px;
+            margin: 0 auto;
+            width: 100%;
+            position: relative;
+            z-index: 10;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            padding: 0.6rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent-gold);
+            margin-bottom: 3rem;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .hero-badge::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: var(--accent-gold);
+            border-radius: 50%;
+            animation: pulse 2s ease infinite;
+        }
+
+        .hero h1 {
+            font-size: clamp(3.5rem, 8vw, 7rem);
+            font-weight: 900;
+            line-height: 0.95;
+            letter-spacing: -3px;
+            margin-bottom: 2rem;
+            animation: fadeInUp 0.8s ease 0.2s both;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, var(--accent-gold), var(--accent-orange));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.1rem, 1.5vw, 1.3rem);
+            color: var(--text-secondary);
+            max-width: 700px;
+            line-height: 1.8;
+            margin-bottom: 3rem;
+            font-weight: 400;
+            animation: fadeInUp 0.8s ease 0.4s both;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.8s ease 0.6s both;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-gold), var(--accent-orange));
+            color: var(--dark-primary);
+            padding: 1.3rem 3rem;
+            border: none;
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.4s ease;
+            border-radius: 50px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.6s;
+        }
+
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 50px rgba(212, 175, 55, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            padding: 1.3rem 3rem;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            border-radius: 50px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-secondary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            transition: width 0.4s ease;
+            z-index: -1;
+        }
+
+        .btn-secondary:hover::before {
+            width: 100%;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent-gold);
+            color: var(--accent-gold);
+        }
+
+        /* Floating Stats */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 3rem;
+            margin-top: 8rem;
+            padding: 3rem 2rem;
+            background: rgba(10, 10, 10, 0.6);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            animation: fadeInUp 0.8s ease 0.8s both;
         }
 
         .stat-item {
@@ -338,235 +385,498 @@
         }
 
         .stat-number {
-            font-size: 1.5rem;
+            font-size: 3rem;
             font-weight: 800;
-            color: #ffffff;
+            background: linear-gradient(135deg, var(--text-primary), var(--text-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             display: block;
+            margin-bottom: 0.5rem;
         }
 
         .stat-label {
-            font-size: 0.7rem;
-            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.85rem;
+            color: var(--text-secondary);
             text-transform: uppercase;
             letter-spacing: 1px;
         }
 
-        /* Section with Asymmetric Layout */
-        .section {
-            padding: 6rem 3rem;
+        /* Curved Section Divider */
+        .curve-divider {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            overflow: hidden;
+            line-height: 0;
+        }
+
+        .curve-divider svg {
             position: relative;
+            display: block;
+            width: calc(100% + 1.3px);
+            height: 80px;
+        }
+
+        /* Section */
+        .section {
+            padding: 8rem 6%;
+            position: relative;
+        }
+
+        .section-light {
+            background: var(--dark-secondary);
         }
 
         .section-header {
-            max-width: 600px;
-            margin-bottom: 4rem;
+            max-width: 800px;
+            margin: 0 auto 5rem;
+            text-align: center;
         }
 
-        .section-number {
-            font-size: 8rem;
-            font-weight: 900;
-            color: rgba(255, 255, 255, 0.05);
-            position: absolute;
-            top: -2rem;
-            left: 0;
-            z-index: 1;
-            line-height: 1;
+        .section-label {
+            color: var(--accent-gold);
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 1.5rem;
+            display: block;
         }
 
         .section-title {
-            font-size: 3rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            position: relative;
-            z-index: 2;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 900;
+            letter-spacing: -2px;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
         }
 
-        .section-subtitle {
-            font-size: 1.1rem;
-            color: rgba(255, 255, 255, 0.7);
-            line-height: 1.6;
-            position: relative;
-            z-index: 2;
+        .section-description {
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
         }
 
-        /* Unique Card Layout */
-        .cards-container {
+        /* Organic Value Cards */
+        .value-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1px;
-            background: rgba(255, 255, 255, 0.1);
-            margin-top: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+            max-width: 1400px;
+            margin: 0 auto;
         }
 
-        .service-card {
-            background: #0a0a0a;
-            padding: 3rem;
+        .value-card {
+            background: var(--dark-secondary);
+            padding: 3rem 2.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
-            transition: all 0.5s ease;
-            border: none;
+            overflow: hidden;
+            border-radius: 40px 10px 40px 10px;
         }
 
-        .service-card:hover {
-            background: #1a1a1a;
-            transform: scale(1.02);
-            z-index: 10;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+        .value-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
         }
 
-        .service-card::before {
+        .value-card:hover::before {
+            opacity: 1;
+        }
+
+        .value-card::after {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
-            width: 0;
-            height: 2px;
-            background: #ffffff;
-            transition: width 0.5s ease;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-gold), var(--accent-orange));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.5s ease;
         }
 
-        .service-card:hover::before {
-            width: 100%;
+        .value-card:hover::after {
+            transform: scaleX(1);
+        }
+
+        .value-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(212, 175, 55, 0.2);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+        }
+
+        .value-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(255, 107, 53, 0.15));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: var(--accent-gold);
+            margin-bottom: 2rem;
+            border-radius: 50% 20% 50% 20%;
+            transition: all 0.3s ease;
+        }
+
+        .value-card:hover .value-icon {
+            transform: scale(1.1) rotate(10deg);
+            border-radius: 20% 50% 20% 50%;
+        }
+
+        .value-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .value-description {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        /* Asymmetric Service Grid */
+        .services-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: linear-gradient(135deg, var(--dark-secondary), rgba(21, 21, 21, 0.8));
+            padding: 3.5rem 3rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.5s ease;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            border-radius: 30px;
+        }
+
+        .service-card:nth-child(1) { grid-column: span 6; }
+        .service-card:nth-child(2) { grid-column: span 6; }
+        .service-card:nth-child(3) { grid-column: span 4; }
+        .service-card:nth-child(4) { grid-column: span 8; }
+        .service-card:nth-child(5) { grid-column: span 7; }
+        .service-card:nth-child(6) { grid-column: span 5; }
+
+        .service-card::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.08) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .service-card:hover::after {
+            opacity: 1;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(212, 175, 55, 0.3);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
         }
 
         .service-icon {
             font-size: 2.5rem;
-            color: #ffffff;
+            color: var(--accent-gold);
             margin-bottom: 2rem;
-            opacity: 0.9;
+            display: block;
+            transition: all 0.3s ease;
+        }
+
+        .service-card:hover .service-icon {
+            transform: scale(1.15) rotate(5deg);
+            color: var(--accent-orange);
         }
 
         .service-title {
-            font-size: 1.3rem;
+            font-size: 1.6rem;
             font-weight: 700;
-            margin-bottom: 1rem;
-            color: #ffffff;
+            margin-bottom: 1.2rem;
         }
 
         .service-description {
-            color: rgba(255, 255, 255, 0.7);
-            line-height: 1.6;
-            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
         }
 
-        /* Split Section */
-        .split-section {
+        .service-link {
+            color: var(--accent-gold);
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            transition: gap 0.3s ease;
+        }
+
+        .service-link:hover {
+            gap: 1rem;
+        }
+
+        /* Flowing About Section */
+        .about-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            min-height: 80vh;
+            gap: 6rem;
+            align-items: start;
+            max-width: 1400px;
+            margin: 0 auto;
         }
 
-        .split-left {
-            background: #000000;
-            padding: 4rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .split-right {
-            background: #111111;
-            padding: 4rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
+        .about-content {
             position: relative;
         }
 
-        .split-right::before {
+        .about-content::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.02'%3E%3Cpath d='M0 0h40v40H0z'/%3E%3C/g%3E%3C/svg%3E");
+            top: -20px;
+            left: -20px;
+            width: 100px;
+            height: 100px;
+            background: var(--accent-gold);
+            opacity: 0.05;
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            z-index: -1;
         }
 
-        /* Contact Form - Unique Design */
+        .about-content h3 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+
+        .about-content p {
+            color: var(--text-secondary);
+            line-height: 1.9;
+            margin-bottom: 1.5rem;
+            font-size: 1.05rem;
+        }
+
+        .credentials {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .cred-item {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            padding: 1.5rem;
+            background: var(--dark-primary);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+            border-radius: 20px;
+        }
+
+        .cred-item:hover {
+            border-color: rgba(212, 175, 55, 0.3);
+            transform: translateX(5px);
+        }
+
+        .cred-icon {
+            font-size: 1.5rem;
+            color: var(--accent-gold);
+        }
+
+        .cred-text {
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        /* Organic Contact Section */
+        .contact-wrapper {
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 6rem;
+        }
+
+        .contact-info {
+            position: relative;
+        }
+
+        .contact-info::before {
+            content: '';
+            position: absolute;
+            top: -40px;
+            right: -40px;
+            width: 200px;
+            height: 200px;
+            background: var(--accent-orange);
+            opacity: 0.04;
+            border-radius: 40% 60% 70% 30% / 60% 40% 60% 40%;
+            z-index: -1;
+        }
+
+        .contact-info h3 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+
+        .contact-info p {
+            color: var(--text-secondary);
+            line-height: 1.9;
+            margin-bottom: 3rem;
+            font-size: 1.05rem;
+        }
+
+        .contact-items {
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            gap: 1.5rem;
+            align-items: flex-start;
+        }
+
+        .contact-icon {
+            width: 55px;
+            height: 55px;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), rgba(255, 107, 53, 0.2));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: var(--accent-gold);
+            flex-shrink: 0;
+            border-radius: 50% 20% 50% 20%;
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover .contact-icon {
+            transform: scale(1.1) rotate(10deg);
+            background: linear-gradient(135deg, var(--accent-gold), var(--accent-orange));
+            color: var(--dark-primary);
+            border-radius: 20% 50% 20% 50%;
+        }
+
+        .contact-details h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .contact-details p {
+            color: var(--text-secondary);
+            margin: 0;
+            font-size: 0.95rem;
+        }
+
         .contact-form {
-            background: transparent;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 3rem;
+            background: var(--dark-secondary);
+            padding: 3.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 40px;
             position: relative;
         }
 
         .contact-form::before {
             content: '';
             position: absolute;
-            top: 0;
-            right: 0;
-            width: 60px;
-            height: 60px;
-            border-top: 2px solid #ffffff;
-            border-right: 2px solid #ffffff;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(135deg, var(--accent-gold), var(--accent-orange));
+            border-radius: 40px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -1;
         }
 
-        .contact-form::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 60px;
-            height: 60px;
-            border-bottom: 2px solid #ffffff;
-            border-left: 2px solid #ffffff;
+        .contact-form:hover::before {
+            opacity: 0.1;
         }
 
         .form-group {
             margin-bottom: 2rem;
-            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            color: var(--text-primary);
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            font-size: 0.9rem;
         }
 
         .form-group input,
         .form-group textarea {
             width: 100%;
-            background: transparent;
-            border: none;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-            padding: 1rem 0;
-            color: #ffffff;
-            font-size: 1rem;
+            background: var(--dark-primary);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1.1rem 1.3rem;
+            color: white;
+            font-size: 0.95rem;
             font-family: inherit;
             transition: all 0.3s ease;
+            border-radius: 15px;
         }
 
         .form-group input:focus,
         .form-group textarea:focus {
             outline: none;
-            border-bottom-color: #ffffff;
+            border-color: var(--accent-gold);
+            background: rgba(21, 21, 21, 0.8);
         }
 
-        .form-group label {
-            position: absolute;
-            top: 1rem;
-            left: 0;
-            color: rgba(255, 255, 255, 0.5);
-            transition: all 0.3s ease;
-            pointer-events: none;
-            text-transform: uppercase;
-            font-size: 0.8rem;
-            letter-spacing: 1px;
-        }
-
-        .form-group input:focus + label,
-        .form-group textarea:focus + label,
-        .form-group input:not(:placeholder-shown) + label,
-        .form-group textarea:not(:placeholder-shown) + label {
-            top: -1rem;
-            font-size: 0.7rem;
-            color: #ffffff;
+        .form-group textarea {
+            resize: vertical;
+            min-height: 140px;
         }
 
         .form-submit {
-            background: transparent;
-            color: #ffffff;
-            border: 1px solid #ffffff;
-            padding: 1rem 3rem;
-            font-weight: 600;
+            background: linear-gradient(135deg, var(--accent-gold), var(--accent-orange));
+            color: var(--dark-primary);
+            padding: 1.2rem 3rem;
+            border: none;
+            font-weight: 700;
+            font-size: 0.9rem;
+            cursor: pointer;
             text-transform: uppercase;
             letter-spacing: 1px;
-            cursor: pointer;
-            transition: all 0.3s ease;
+            width: 100%;
+            transition: all 0.4s ease;
+            border-radius: 50px;
             position: relative;
             overflow: hidden;
         }
@@ -578,104 +888,141 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: #ffffff;
-            transition: left 0.3s ease;
-            z-index: -1;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.6s;
         }
 
         .form-submit:hover::before {
-            left: 0;
+            left: 100%;
         }
 
         .form-submit:hover {
-            color: #000000;
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.4);
         }
 
-        /* Footer */
+        /* Footer with Organic Shape */
         .footer {
-            background: #000000;
-            padding: 2rem 3rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            background: var(--dark-secondary);
+            padding: 5rem 6% 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 3rem;
+            max-width: 1600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .footer-about h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1.5rem;
+            font-weight: 800;
+        }
+
+        .footer-about p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
+        }
+
+        .social-links {
             display: flex;
-            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        .social-links a {
+            width: 42px;
+            height: 42px;
+            background: rgba(255, 255, 255, 0.05);
+            display: flex;
             align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-radius: 50%;
+        }
+
+        .social-links a:hover {
+            background: linear-gradient(135deg, var(--accent-gold), var(--accent-orange));
+            color: var(--dark-primary);
+            transform: translateY(-3px);
+        }
+
+        .footer-column h4 {
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
         }
 
         .footer-links {
             display: flex;
-            gap: 2rem;
+            flex-direction: column;
+            gap: 1rem;
         }
 
         .footer-links a {
-            color: rgba(255, 255, 255, 0.6);
+            color: var(--text-secondary);
             text-decoration: none;
             font-size: 0.9rem;
             transition: color 0.3s ease;
         }
 
         .footer-links a:hover {
-            color: #ffffff;
+            color: var(--accent-gold);
         }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .sidebar {
-                transform: translateX(-100%);
-            }
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
 
-            .sidebar.open {
-                transform: translateX(0);
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
             }
-
-            .main-content {
-                margin-left: 0;
-            }
-
-            .top-bar {
-                left: 0;
-            }
-
-            .split-section {
-                grid-template-columns: 1fr;
-            }
-
-            .hero h1 {
-                font-size: 3rem;
-            }
-
-            .stats-bar {
-                flex-wrap: wrap;
-                gap: 2rem;
-                height: auto;
-                padding: 2rem;
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
         }
 
-        /* Mobile Menu Toggle */
-        .mobile-toggle {
-            display: none;
-            position: fixed;
-            top: 1rem;
-            left: 1rem;
-            z-index: 1001;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: #ffffff;
-            padding: 0.5rem;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        @media (max-width: 768px) {
-            .mobile-toggle {
-                display: block;
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.5;
             }
         }
 
-        /* Scroll Animations */
         .fade-in {
             opacity: 0;
-            transform: translateY(50px);
+            transform: translateY(40px);
             transition: all 0.8s ease;
         }
 
@@ -683,425 +1030,546 @@
             opacity: 1;
             transform: translateY(0);
         }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .service-card {
+                grid-column: span 1 !important;
+            }
+
+            .footer-grid,
+            .contact-grid,
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                top: 78px;
+                left: -100%;
+                flex-direction: column;
+                background: rgba(10, 10, 10, 0.98);
+                width: 100%;
+                padding: 2rem 6%;
+                gap: 2rem;
+                transition: left 0.3s ease;
+                align-items: flex-start;
+                border-top: 1px solid rgba(255, 255, 255, 0.05);
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .mobile-toggle {
+                display: block;
+            }
+
+            .value-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .credentials {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-actions {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .btn-primary,
+            .btn-secondary {
+                width: 100%;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
-
 <body>
-    <div class="grid-overlay"></div>
-    
-    <!-- Mobile Toggle -->
-    <button class="mobile-toggle" onclick="toggleSidebar()">
-        <i class="fas fa-bars"></i>
-    </button>
+    <div class="organic-bg">
+        <div class="organic-shape shape-1"></div>
+        <div class="organic-shape shape-2"></div>
+        <div class="organic-shape shape-3"></div>
+    </div>
 
-    <!-- Sidebar Navigation -->
-    <aside class="sidebar" id="sidebar">
-        <div class="sidebar-logo">AR</div>
-        <nav class="sidebar-nav">
-            <a href="#hero">
-                <i class="fas fa-home"></i>
-                <span>Home</span>
+    <header class="header" id="header">
+        <div class="header-content">
+            <a href="#" class="logo">
+                <img src="assets/logo.png" alt="Arden Risk Logo">
             </a>
-            <a href="#about">
-                <i class="fas fa-info-circle"></i>
-                <span>About</span>
-            </a>
-            <a href="#services">
-                <i class="fas fa-shield-alt"></i>
-                <span>Services</span>
-            </a>
-            <a href="#technology">
-                <i class="fas fa-cog"></i>
-                <span>Technology</span>
-            </a>
-            <a href="#contact">
-                <i class="fas fa-envelope"></i>
-                <span>Contact</span>
-            </a>
-        </nav>
-    </aside>
-
-    <!-- Top Bar -->
-    <header class="top-bar">
-        <div class="top-bar-left">
-            <span class="breadcrumb">ARDEN RISK / ELITE SECURITY SOLUTIONS</span>
+            <nav>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><button class="cta-header" onclick="scrollToContact()">Get Started</button></li>
+                </ul>
+            </nav>
+            <button class="mobile-toggle" id="mobileToggle">
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
-        <button class="contact-button" onclick="scrollToContact()">GET CONSULTATION</button>
     </header>
 
-    <!-- Main Content -->
-    <main class="main-content">
-        <!-- Hero Section -->
-        <section id="hero" class="hero">
-            <video class="hero-video" autoplay muted loop playsinline>
-                <source src="assets/backgroundVideo.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-            <div class="hero-overlay"></div>
-            <div class="hero-content fade-in">
-                <div class="hero-badge">CLASSIFIED OPERATIONS</div>
-                <h1>HIGH END<br>SECURITY &<br>INTELLIGENCE</h1>
-                <p class="hero-subtitle">We provide industry-leading services to mitigate and eliminate the risks to your organisation through advanced tactical operations and intelligence gathering.</p>
-                <div class="hero-actions">
-                    <button class="cta-primary" onclick="scrollToServices()">LEARN MORE</button>
-                    <button class="cta-secondary" onclick="scrollToContact()">CONTACT</button>
-                </div>
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <span>Elite Security Operations</span>
             </div>
-            <div class="stats-bar">
+            <h1>
+                Security That<br>
+                <span class="gradient-text">Never Sleeps</span>
+            </h1>
+            <p class="hero-subtitle">
+                Military-grade protection delivered by elite personnel. Advanced tactical operations, intelligence gathering, and 24/7 response capabilities for high-risk environments.
+            </p>
+            <div class="hero-actions">
+                <button class="btn-primary" onclick="scrollToContact()">Request Consultation</button>
+                <button class="btn-secondary" onclick="scrollToServices()">Explore Services</button>
+            </div>
+
+            <div class="stats">
                 <div class="stat-item">
                     <span class="stat-number">24/7</span>
-                    <span class="stat-label">Operations</span>
+                    <span class="stat-label">Active Operations</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">15+</span>
+                    <span class="stat-label">Years Experience</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">100%</span>
+                    <span class="stat-label">Mission Success</span>
                 </div>
                 <div class="stat-item">
                     <span class="stat-number">Elite</span>
-                    <span class="stat-label">Personnel</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number">Advanced</span>
-                    <span class="stat-label">Technology</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number">Total</span>
-                    <span class="stat-label">Security</span>
+                    <span class="stat-label">Trained Personnel</span>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- About Section -->
-        <section id="about" class="section">
-            <div class="section-number">01</div>
-            <div class="section-header fade-in">
-                <h2 class="section-title">Military Excellence</h2>
-                <p class="section-subtitle">Professional security solutions delivered by elite personnel with uncompromising standards and advanced operational capabilities.</p>
-            </div>
-        </section>
+    <section class="section">
+        <div class="section-header fade-in">
+            <span class="section-label">Why Choose Arden Risk</span>
+            <h2 class="section-title">Uncompromising Excellence</h2>
+            <p class="section-description">
+                We deliver world-class security solutions backed by military expertise, cutting-edge technology, and an unwavering commitment to your safety.
+            </p>
+        </div>
 
-        <!-- Services Section -->
-        <section id="services" class="section">
-            <div class="section-number">02</div>
-            <div class="section-header fade-in">
-                <h2 class="section-title">Core Capabilities</h2>
-                <p class="section-subtitle">Specialized security solutions for high-risk environments and complex operational requirements.</p>
-            </div>
-            
-            <div class="cards-container fade-in">
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-briefcase-medical"></i>
-                    </div>
-                    <h3 class="service-title">Remote Medicine</h3>
-                    <p class="service-description">Advanced medical support capabilities with certified personnel for remote and high-risk operations with immediate response protocols.</p>
+        <div class="value-grid">
+            <div class="value-card fade-in">
+                <div class="value-icon">
+                    <i class="fas fa-users-cog"></i>
                 </div>
-                
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-user-shield"></i>
-                    </div>
+                <h3 class="value-title">Elite Personnel</h3>
+                <p class="value-description">
+                    Highly trained security professionals with extensive military and law enforcement backgrounds. Every team member undergoes rigorous vetting and continuous training.
+                </p>
+            </div>
+
+            <div class="value-card fade-in">
+                <div class="value-icon">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <h3 class="value-title">24/7 Operations</h3>
+                <p class="value-description">
+                    Round-the-clock monitoring and rapid response teams. Our command center never sleeps, ensuring immediate action when threats emerge.
+                </p>
+            </div>
+
+            <div class="value-card fade-in">
+                <div class="value-icon">
+                    <i class="fas fa-microchip"></i>
+                </div>
+                <h3 class="value-title">Advanced Technology</h3>
+                <p class="value-description">
+                    State-of-the-art surveillance, communication, and intelligence systems. Military-grade equipment for superior operational effectiveness.
+                </p>
+            </div>
+
+            <div class="value-card fade-in">
+                <div class="value-icon">
+                    <i class="fas fa-award"></i>
+                </div>
+                <h3 class="value-title">Professional Standards</h3>
+                <p class="value-description">
+                    PSIRA registered and ISO certified operations. We adhere to international security standards and industry best practices.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="section section-light">
+        <div class="section-header fade-in">
+            <span class="section-label">Our Services</span>
+            <h2 class="section-title">Comprehensive Security Solutions</h2>
+            <p class="section-description">
+                Specialized protection tailored for high-risk environments and complex operational requirements across Southern Africa.
+            </p>
+        </div>
+
+        <div class="services-container">
+            <div class="services-grid">
+                <div class="service-card fade-in">
+                    <i class="fas fa-user-shield service-icon"></i>
                     <h3 class="service-title">Executive Protection</h3>
-                    <p class="service-description">Discreet close protection services for high-profile individuals and corporate executives with comprehensive threat assessment.</p>
+                    <p class="service-description">
+                        Discreet close protection for high-profile individuals and corporate executives. Comprehensive threat assessment, advance security planning, and 24/7 personal protection teams.
+                    </p>
+                    <a href="#contact" class="service-link" onclick="prefillService('Executive Protection')">
+                        Learn More <i class="fas fa-arrow-right"></i>
+                    </a>
                 </div>
-                
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-industry"></i>
-                    </div>
+
+                <div class="service-card fade-in">
+                    <i class="fas fa-briefcase-medical service-icon"></i>
+                    <h3 class="service-title">Remote Medicine</h3>
+                    <p class="service-description">
+                        Advanced medical support with certified paramedics for remote operations. Immediate trauma response, evacuation protocols, and emergency care in high-risk zones.
+                    </p>
+                    <a href="#contact" class="service-link" onclick="prefillService('Remote Medicine')">
+                        Learn More <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <div class="service-card fade-in">
+                    <i class="fas fa-industry service-icon"></i>
                     <h3 class="service-title">Mine Security</h3>
-                    <p class="service-description">Specialized industrial security solutions for mining operations and critical infrastructure with 24/7 monitoring capabilities.</p>
+                    <p class="service-description">
+                        Specialized industrial security for mining operations and critical infrastructure. Armed response, access control, perimeter monitoring, and incident management.
+                    </p>
+                    <a href="#contact" class="service-link" onclick="prefillService('Mine Security')">
+                        Learn More <i class="fas fa-arrow-right"></i>
+                    </a>
                 </div>
-                
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-truck"></i>
-                    </div>
+
+                <div class="service-card fade-in">
+                    <i class="fas fa-truck service-icon"></i>
                     <h3 class="service-title">High Value Transport</h3>
-                    <p class="service-description">Secure transportation services for valuable assets with comprehensive risk management and real-time tracking systems.</p>
+                    <p class="service-description">
+                        Secure transportation for valuable assets and personnel. Armored vehicles, armed escorts, real-time GPS tracking, and comprehensive risk management.
+                    </p>
+                    <a href="#contact" class="service-link" onclick="prefillService('High Value Transport')">
+                        Learn More <i class="fas fa-arrow-right"></i>
+                    </a>
                 </div>
-            </div>
-        </section>
 
-        <!-- Technology Section -->
-        <section id="technology" class="section">
-            <div class="section-number">03</div>
-            <div class="section-header fade-in">
-                <h2 class="section-title">Advanced Systems</h2>
-                <p class="section-subtitle">Cutting-edge technology providing superior situational awareness and operational effectiveness in all environments.</p>
-            </div>
-            
-            <div class="cards-container fade-in">
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-drone"></i>
-                    </div>
+                <div class="service-card fade-in">
+                    <i class="fas fa-drone service-icon"></i>
                     <h3 class="service-title">Drone Surveillance</h3>
-                    <p class="service-description">Advanced aerial monitoring with thermal imaging and real-time intelligence gathering capabilities for comprehensive area coverage.</p>
+                    <p class="service-description">
+                        Advanced aerial monitoring with thermal imaging capabilities. Real-time intelligence gathering, perimeter surveillance, and threat detection from above.
+                    </p>
+                    <a href="#contact" class="service-link" onclick="prefillService('Drone Surveillance')">
+                        Learn More <i class="fas fa-arrow-right"></i>
+                    </a>
                 </div>
-                
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-satellite-dish"></i>
-                    </div>
+
+                <div class="service-card fade-in">
+                    <i class="fas fa-satellite-dish service-icon"></i>
                     <h3 class="service-title">Secure Communications</h3>
-                    <p class="service-description">Encrypted communication systems ensuring confidential coordination across all operations with military-grade security protocols.</p>
-                </div>
-                
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <h3 class="service-title">Intelligence Analytics</h3>
-                    <p class="service-description">Data analysis and threat modeling providing predictive intelligence and comprehensive risk assessment capabilities.</p>
-                </div>
-                
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-shield-alt"></i>
-                    </div>
-                    <h3 class="service-title">Command Control</h3>
-                    <p class="service-description">Centralized operations center with integrated monitoring and response coordination for real-time tactical management.</p>
+                    <p class="service-description">
+                        Military-grade encrypted communication systems. Secure command and control infrastructure ensuring confidential coordination across all operations.
+                    </p>
+                    <a href="#contact" class="service-link" onclick="prefillService('Secure Communications')">
+                        Learn More <i class="fas fa-arrow-right"></i>
+                    </a>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Contact Section -->
-        <section id="contact" class="split-section">
-            <div class="split-left fade-in">
-                <div class="section-number">04</div>
-                <h2 class="section-title">Secure Contact</h2>
-                <p class="section-subtitle">Connect with our security specialists for a confidential consultation and comprehensive threat assessment.</p>
-                
-                <div style="margin-top: 3rem;">
-                    <div style="margin-bottom: 2rem;">
-                        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
-                            <i class="fas fa-phone" style="color: rgba(255,255,255,0.7);"></i>
-                            <span>+27 XX XXX XXXX</span>
-                        </div>
-                        <div style="margin-left: 2rem; color: rgba(255,255,255,0.6); font-size: 0.9rem;">24/7 Emergency Response</div>
+    <section id="about" class="section">
+        <div class="section-header fade-in">
+            <span class="section-label">About Us</span>
+            <h2 class="section-title">Military Excellence in Security</h2>
+        </div>
+
+        <div class="about-grid">
+            <div class="about-content fade-in">
+                <h3>Who We Are</h3>
+                <p>
+                    Arden Risk is Southern Africa's leading provider of elite security and intelligence services. Founded by veterans with extensive military and law enforcement experience, we bring uncompromising standards to every engagement.
+                </p>
+                <p>
+                    Our mission is to protect lives, assets, and operations through proactive threat assessment, strategic planning, and tactical execution. We serve corporate clients, high-net-worth individuals, and critical infrastructure across the region.
+                </p>
+
+                <div class="credentials">
+                    <div class="cred-item">
+                        <i class="fas fa-certificate cred-icon"></i>
+                        <span class="cred-text">PSIRA Registered</span>
                     </div>
-                    
-                    <div style="margin-bottom: 2rem;">
-                        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
-                            <i class="fas fa-map-marker-alt" style="color: rgba(255,255,255,0.7);"></i>
-                            <span>Johannesburg, South Africa</span>
-                        </div>
-                        <div style="margin-left: 2rem; color: rgba(255,255,255,0.6); font-size: 0.9rem;">Secure Facility Access</div>
+                    <div class="cred-item">
+                        <i class="fas fa-shield-alt cred-icon"></i>
+                        <span class="cred-text">ISO Certified</span>
                     </div>
-                    
-                    <div>
-                        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
-                            <i class="fas fa-envelope" style="color: rgba(255,255,255,0.7);"></i>
-                            <span>contact@ardenrisk.co.za</span>
-                        </div>
-                        <div style="margin-left: 2rem; color: rgba(255,255,255,0.6); font-size: 0.9rem;">Encrypted Communications</div>
+                    <div class="cred-item">
+                        <i class="fas fa-graduation-cap cred-icon"></i>
+                        <span class="cred-text">Advanced Training</span>
+                    </div>
+                    <div class="cred-item">
+                        <i class="fas fa-medal cred-icon"></i>
+                        <span class="cred-text">15+ Years Experience</span>
                     </div>
                 </div>
             </div>
-            
-            <div class="split-right fade-in">
-                <form class="contact-form">
-                    <div class="form-group">
-                        <input type="text" name="name" placeholder=" " required>
-                        <label>Name</label>
-                    </div>
-                    
-                    <div class="form-group">
-                        <input type="email" name="email" placeholder=" " required>
-                        <label>Email</label>
-                    </div>
-                    
-                    <div class="form-group">
-                        <input type="text" name="company" placeholder=" ">
-                        <label>Company</label>
-                    </div>
-                    
-                    <div class="form-group">
-                        <textarea name="message" rows="4" placeholder=" " required></textarea>
-                        <label>Security Requirements</label>
-                    </div>
-                    
-                    <button type="submit" class="form-submit">Send Secure Message</button>
-                </form>
-            </div>
-        </section>
-    </main>
 
-    <!-- Footer -->
+            <div class="about-content fade-in">
+                <h3>Our Commitment</h3>
+                <p>
+                    Every member of our team undergoes rigorous selection and continuous professional development. We maintain the highest standards of integrity, discretion, and operational excellence in everything we do.
+                </p>
+                <p>
+                    From executive protection to industrial security, from intelligence gathering to emergency medical response, we deliver comprehensive solutions that give our clients confidence and peace of mind in an uncertain world.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section section-light">
+        <div class="section-header fade-in">
+            <span class="section-label">Get In Touch</span>
+            <h2 class="section-title">Start a Conversation</h2>
+            <p class="section-description">
+                Connect with our security specialists for a confidential consultation. Available 24/7 for emergency response and urgent security needs.
+            </p>
+        </div>
+
+        <div class="contact-wrapper">
+            <div class="contact-grid">
+                <div class="contact-info fade-in">
+                    <h3>Direct Contact</h3>
+                    <p>
+                        Our team is ready to discuss your security requirements and provide tailored solutions for your specific operational needs.
+                    </p>
+
+                    <div class="contact-items">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h4>24/7 Emergency Line</h4>
+                                <p>+27 XX XXX XXXX</p>
+                            </div>
+                        </div>
+
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h4>Email Address</h4>
+                                <p>contact@ardenrisk.co.za</p>
+                            </div>
+                        </div>
+
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h4>Office Location</h4>
+                                <p>Johannesburg, South Africa</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="fade-in">
+                    <form class="contact-form" id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Full Name *</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="company">Company / Organization</label>
+                            <input type="text" id="company" name="company">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">Security Requirements *</label>
+                            <textarea id="message" name="message" required></textarea>
+                        </div>
+
+                        <button type="submit" class="form-submit">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <footer class="footer">
-        <div>© 2025 ARDEN RISK. ALL RIGHTS RESERVED.</div>
-        <div class="footer-links">
-            <a href="#">PRIVACY</a>
-            <a href="#">TERMS</a>
-            <a href="#">SECURITY</a>
+        <div class="footer-grid">
+            <div class="footer-about">
+                <h3>ARDEN RISK</h3>
+                <p>
+                    Elite security and intelligence services providing comprehensive protection solutions across Southern Africa. Military excellence meets professional security.
+                </p>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-column">
+                <h4>Quick Links</h4>
+                <div class="footer-links">
+                    <a href="#home">Home</a>
+                    <a href="#about">About Us</a>
+                    <a href="#services">Services</a>
+                    <a href="#contact">Contact</a>
+                </div>
+            </div>
+
+            <div class="footer-column">
+                <h4>Services</h4>
+                <div class="footer-links">
+                    <a href="#services">Executive Protection</a>
+                    <a href="#services">Mine Security</a>
+                    <a href="#services">High Value Transport</a>
+                    <a href="#services">Drone Surveillance</a>
+                </div>
+            </div>
+
+            <div class="footer-column">
+                <h4>Legal</h4>
+                <div class="footer-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Security Statement</a>
+                    <a href="#">Compliance</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2025 Arden Risk. All rights reserved. PSIRA Registered Security Service Provider.</p>
         </div>
     </footer>
 
     <script>
-        // Sidebar toggle for mobile
-        function toggleSidebar() {
-            const sidebar = document.getElementById('sidebar');
-            sidebar.classList.toggle('open');
-        }
+        const mobileToggle = document.getElementById('mobileToggle');
+        const navMenu = document.getElementById('navMenu');
 
-        // Smooth scrolling functions
-        function scrollToServices() {
-            document.getElementById('services').scrollIntoView({
-                behavior: 'smooth'
+        mobileToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            const icon = mobileToggle.querySelector('i');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+        });
+
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                const icon = mobileToggle.querySelector('i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
             });
-        }
+        });
 
         function scrollToContact() {
-            document.getElementById('contact').scrollIntoView({
-                behavior: 'smooth'
-            });
+            document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
         }
 
-        // Smooth scrolling for sidebar links
-        document.querySelectorAll('.sidebar-nav a').forEach(anchor => {
+        function scrollToServices() {
+            document.getElementById('services').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-                
-                // Close mobile sidebar
-                if (window.innerWidth <= 768) {
-                    document.getElementById('sidebar').classList.remove('open');
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
             });
         });
 
-        // Fade in animations on scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
         const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
+            entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
                 }
             });
-        }, observerOptions);
-
-        document.querySelectorAll('.fade-in').forEach(el => {
-            observer.observe(el);
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
         });
 
-        // Form handling with security theme
-        document.querySelector('.contact-form').addEventListener('submit', function (e) {
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            
             const submitBtn = this.querySelector('.form-submit');
             const originalText = submitBtn.textContent;
             
-            // Security-themed loading states
-            const loadingMessages = [
-                'ENCRYPTING MESSAGE...',
-                'ESTABLISHING SECURE CONNECTION...',
-                'TRANSMITTING DATA...',
-                'MESSAGE SENT SECURELY'
-            ];
-            
-            let messageIndex = 0;
+            submitBtn.textContent = 'Sending...';
             submitBtn.disabled = true;
             
-            const interval = setInterval(() => {
-                submitBtn.textContent = loadingMessages[messageIndex];
-                messageIndex++;
-                
-                if (messageIndex >= loadingMessages.length) {
-                    clearInterval(interval);
-                    setTimeout(() => {
-                        alert('SECURE MESSAGE TRANSMITTED\n\nOur tactical response team will contact you within 24 hours for classified briefing.');
-                        this.reset();
-                        submitBtn.textContent = originalText;
-                        submitBtn.disabled = false;
-                    }, 1000);
-                }
-            }, 800);
-        });
-
-        // Enhanced sidebar active state
-        window.addEventListener('scroll', function() {
-            const sections = ['hero', 'about', 'services', 'technology', 'contact'];
-            const scrollPos = window.scrollY + 100;
-            
-            sections.forEach(section => {
-                const element = document.getElementById(section);
-                const link = document.querySelector(`.sidebar-nav a[href="#${section}"]`);
-                
-                if (element && link) {
-                    const offsetTop = element.offsetTop;
-                    const height = element.offsetHeight;
-                    
-                    if (scrollPos >= offsetTop && scrollPos < offsetTop + height) {
-                        document.querySelectorAll('.sidebar-nav a').forEach(a => a.classList.remove('active'));
-                        link.classList.add('active');
-                    }
-                }
-            });
-        });
-
-        // Initialize page
-        document.addEventListener('DOMContentLoaded', function() {
-            // Initial fade-in animations
             setTimeout(() => {
-                document.querySelectorAll('.fade-in').forEach((el, index) => {
-                    setTimeout(() => {
-                        if (el.getBoundingClientRect().top < window.innerHeight) {
-                            el.classList.add('visible');
-                        }
-                    }, index * 100);
-                });
-            }, 300);
-            
-            // Add typing effect to hero title
-            const heroTitle = document.querySelector('.hero h1');
-            if (heroTitle) {
-                const text = heroTitle.textContent;
-                heroTitle.textContent = '';
-                heroTitle.style.opacity = '1';
-                
-                let i = 0;
-                const typeInterval = setInterval(() => {
-                    heroTitle.textContent += text.charAt(i);
-                    i++;
-                    if (i >= text.length) {
-                        clearInterval(typeInterval);
-                    }
-                }, 100);
-            }
+                alert('Thank you for contacting Arden Risk. Our security specialists will respond within 24 hours.');
+                this.reset();
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            }, 1500);
         });
 
-        // Close mobile sidebar when clicking outside
-        document.addEventListener('click', function(e) {
-            const sidebar = document.getElementById('sidebar');
-            const toggle = document.querySelector('.mobile-toggle');
-            
-            if (window.innerWidth <= 768 && 
-                !sidebar.contains(e.target) && 
-                !toggle.contains(e.target) && 
-                sidebar.classList.contains('open')) {
-                sidebar.classList.remove('open');
-            }
-        });
-
-        // Add active state styling
-        const style = document.createElement('style');
-        style.textContent = `
-            .sidebar-nav a.active {
-                color: #ffffff !important;
-            }
-            .sidebar-nav a.active::before {
-                height: 20px !important;
-            }
-        `;
-        document.head.appendChild(style);
+        function prefillService(serviceName) {
+            setTimeout(() => {
+                const messageField = document.getElementById('message');
+                if (messageField) {
+                    messageField.value = `I'm interested in learning more about ${serviceName}.`;
+                    messageField.focus();
+                }
+            }, 500);
+        }
     </script>
 </body>
-
 </html>
