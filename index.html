@@ -369,7 +369,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.6) 100%);
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.2) 100%);
             z-index: 1;
         }
 
@@ -397,15 +397,15 @@
             display: inline-flex;
             align-items: center;
             gap: 0.8rem;
-            background: rgba(0, 31, 63, 0.1);
-            border: 1px solid rgba(0, 31, 63, 0.3);
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.3);
             padding: 0.6rem 1.5rem;
             border-radius: 50px;
             font-size: 0.75rem;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 2px;
-            color: var(--accent-navy);
+            color: var(--light-primary);
             margin-bottom: 3rem;
             animation: fadeInUp 0.8s ease;
         }
@@ -414,7 +414,7 @@
             content: '';
             width: 6px;
             height: 6px;
-            background: var(--accent-navy);
+            background: var(--light-primary);
             border-radius: 50%;
             animation: pulse 2s ease infinite;
         }
@@ -425,18 +425,19 @@
             line-height: 1.1;
             letter-spacing: -3px;
             margin-bottom: 2rem;
-            color: var(--text-primary);
+            color: var(--light-primary);
         }
 
         .typewriter-text {
-            display: inline-block;
+            display: block;
             position: relative;
-            color: var(--accent-navy);
+            color: var(--light-primary);
+            min-height: 2.2em;
         }
 
         .typewriter-text::after {
             content: '|';
-            color: var(--accent-navy);
+            color: var(--light-primary);
             animation: blink 0.7s infinite;
         }
 
@@ -447,7 +448,7 @@
 
         .hero-subtitle {
             font-size: clamp(1.1rem, 1.5vw, 1.3rem);
-            color: var(--text-secondary);
+            color: rgba(255, 255, 255, 0.9);
             max-width: 700px;
             line-height: 1.8;
             margin-bottom: 3rem;
@@ -501,9 +502,9 @@
 
         .btn-secondary {
             background: transparent;
-            color: var(--text-primary);
+            color: var(--light-primary);
             padding: 1.3rem 3rem;
-            border: 1px solid rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.5);
             font-weight: 700;
             font-size: 0.95rem;
             cursor: pointer;
@@ -522,7 +523,7 @@
             left: 0;
             width: 0;
             height: 100%;
-            background: rgba(0, 31, 63, 0.1);
+            background: rgba(255, 255, 255, 0.2);
             transition: width 0.4s ease;
             z-index: -1;
         }
@@ -532,8 +533,8 @@
         }
 
         .btn-secondary:hover {
-            border-color: var(--accent-navy);
-            color: var(--accent-navy);
+            border-color: var(--light-primary);
+            color: var(--light-primary);
         }
 
         /* Floating Stats */
@@ -1338,7 +1339,6 @@
                 <span>Elite Security Operations</span>
             </div>
             <h1>
-                Security That<br>
                 <span class="typewriter-text" id="typewriter"></span>
             </h1>
             <p class="hero-subtitle">
@@ -1392,11 +1392,11 @@
 
             <div class="value-card fade-in">
                 <div class="value-icon">
-                    <i class="fas fa-clock"></i>
+                    <i class="fas fa-satellite-dish"></i>
                 </div>
-                <h3 class="value-title">24/7 Operations</h3>
+                <h3 class="value-title">The Nest</h3>
                 <p class="value-description">
-                    Round-the-clock monitoring and rapid response teams. Our command center never sleeps, ensuring immediate action when threats emerge.
+                    All operations centrally managed from our high-tech command center. Integrating cutting-edge technology for secure communications, real-time monitoring, and intelligence-led decision making.
                 </p>
             </div>
 
@@ -1416,7 +1416,7 @@
                 </div>
                 <h3 class="value-title">Professional Standards</h3>
                 <p class="value-description">
-                    PSIRA registered and ISO certified operations. We adhere to international security standards and industry best practices.
+                    PSIRA registered and fully compliant operations. We adhere to international security standards and industry best practices.
                 </p>
             </div>
         </div>
@@ -1427,7 +1427,7 @@
             <span class="section-label">Our Services</span>
             <h2 class="section-title">Comprehensive Security Solutions</h2>
             <p class="section-description">
-                Specialized protection tailored for high-risk environments and complex operational requirements across Southern Africa.
+                Specialized protection tailored for high-risk environments and complex operational requirements across Africa.
             </p>
         </div>
 
@@ -1512,10 +1512,10 @@
             <div class="about-content fade-in">
                 <h3>Who We Are</h3>
                 <p>
-                    Arden Risk is Southern Africa's leading provider of elite security and intelligence services. Founded by veterans with extensive military and law enforcement experience, we bring uncompromising standards to every engagement.
+                    Arden Risk identified a gap in Africa for high-end, disciplined security personnel capable of operating to the highest standards. We recruit from ex-police, military, special forces, and Ronin graduates, ensuring exceptional operational capability and professionalism.
                 </p>
                 <p>
-                    Our mission is to protect lives, assets, and operations through proactive threat assessment, strategic planning, and tactical execution. We serve corporate clients, high-net-worth individuals, and critical infrastructure across the region.
+                    All operations are centrally managed from our Nest, integrating cutting-edge technology for secure communications and real-time monitoring. We serve corporate clients, high-net-worth individuals, and critical infrastructure across Africa.
                 </p>
 
                 <div class="credentials">
@@ -1525,11 +1525,11 @@
                     </div>
                     <div class="cred-item">
                         <i class="fas fa-shield-alt cred-icon"></i>
-                        <span class="cred-text">ISO Certified</span>
+                        <span class="cred-text">FREC 3 Certified</span>
                     </div>
                     <div class="cred-item">
                         <i class="fas fa-graduation-cap cred-icon"></i>
-                        <span class="cred-text">Advanced Training</span>
+                        <span class="cred-text">Firearm Competencies</span>
                     </div>
                     <div class="cred-item">
                         <i class="fas fa-medal cred-icon"></i>
@@ -1541,7 +1541,7 @@
             <div class="about-content fade-in">
                 <h3>Our Commitment</h3>
                 <p>
-                    Every member of our team undergoes rigorous selection and continuous professional development. We maintain the highest standards of integrity, discretion, and operational excellence in everything we do.
+                    Stringent selection processes include physical, medical, and shooting standards before employment. Every team member undergoes continuous training with monthly competency checks covering tactics, weapons, and medicine.
                 </p>
                 <p>
                     From executive protection to industrial security, from intelligence gathering to emergency medical response, we deliver comprehensive solutions that give our clients confidence and peace of mind in an uncertain world.
@@ -1639,7 +1639,7 @@
             <div class="footer-about">
                 <h3>ARDEN RISK</h3>
                 <p>
-                    Elite security and intelligence services providing comprehensive protection solutions across Southern Africa. Military excellence meets professional security.
+                    Elite security and intelligence services providing comprehensive protection solutions across Africa. Military excellence meets professional security.
                 </p>
                 <div class="social-links">
                     <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
@@ -1686,15 +1686,29 @@
     </footer>
 
     <script>
-        
-        // GSAP Typewriter Effect
+        // GSAP Typewriter Effect - Types out the full title with line break
         gsap.registerPlugin(TextPlugin);
         
+        // Create the full text with HTML line break
+        const typewriterElement = document.getElementById('typewriter');
+        
+        // First line
         gsap.to("#typewriter", {
             duration: 1.2,
-            text: "Never Sleeps",
+            text: "Elite Security",
             ease: "none",
-            delay: 0.3
+            delay: 0.3,
+            onComplete: function() {
+                // Add line break
+                typewriterElement.innerHTML = "Elite Security<br>";
+                // Second line
+                gsap.to("#typewriter", {
+                    duration: 1,
+                    text: {value: "Elite Security<br>Operations"},
+                    ease: "none",
+                    delay: 0.2
+                });
+            }
         });
 
         // Prefill Service Function
