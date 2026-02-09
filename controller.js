@@ -116,18 +116,18 @@ window.addEventListener('scroll', () => {
     }
 });
 
-document.getElementById('contactForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const submitBtn = this.querySelector('.form-submit');
-    const originalText = submitBtn.textContent;
+// document.getElementById('contactForm').addEventListener('submit', function(e) {
+//     e.preventDefault();
+//     const submitBtn = this.querySelector('.form-submit');
+//     const originalText = submitBtn.textContent;
     
-    submitBtn.textContent = 'Sending...';
-    submitBtn.disabled = true;
+//     submitBtn.textContent = 'Sending...';
+//     submitBtn.disabled = true;
     
-    setTimeout(() => {
-        alert('Thank you for contacting Arden Risk. Our security specialists will respond within 24 hours.');
-        this.reset();
-        submitBtn.textContent = originalText;
-        submitBtn.disabled = false;
-    }, 1500);
-});
+//     setTimeout(() => {
+//         alert('Thank you for contacting Arden Risk. Our security specialists will respond within 24 hours.');
+//         this.reset();
+//         submitBtn.textContent = originalText;
+//         submitBtn.disabled = false;
+//     }, 1500);
+// });

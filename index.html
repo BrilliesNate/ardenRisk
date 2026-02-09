@@ -424,8 +424,7 @@
                     </div>
                     <h3>Registration & Compliance</h3>
                     <ul class="compliance-list">
-                        <li><strong>PSIRA Application:</strong> APP-7485986</li>
-                        <li><strong>Registration No:</strong> 2024/587550/07</li>
+                        <li><img src="assets/psiraLogo.jpeg" alt="PSiRA Registered" style="height: 60px; vertical-align: middle;"></li>
                         <li><strong>SARS Compliant</strong> ✅</li>
                     </ul>
                 </div>
@@ -500,7 +499,16 @@
                 </div>
 
                 <div class="fade-in">
-                    <form class="contact-form contact-form-dark" id="contactForm">
+                    <form class="contact-form contact-form-dark" id="contactForm" 
+                          action="https://formsubmit.co/enquiries@ardenrisk.com" 
+                          method="POST">
+                        
+                        <!-- FormSubmit Configuration -->
+                        <input type="hidden" name="_subject" value="New Contact Form Submission - Arden Risk">
+                        <input type="hidden" name="_captcha" value="false">
+                        <input type="hidden" name="_template" value="table">
+                        <input type="text" name="_honey" style="display:none">
+                        
                         <div class="form-group">
                             <label for="name">Full Name *</label>
                             <input type="text" id="name" name="name" required>
